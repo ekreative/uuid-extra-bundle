@@ -1,0 +1,41 @@
+{
+    "name": "mcfedr/uuid-paramconverter",
+    "description": "A sensi paramconverter for receiving uuids as url params",
+    "type": "symfony-bundle",
+    "keywords": ["uuid", "identifier", "guid", "paramconverter", "param", "converter", "symfony", "bundle"],
+    "homepage": "https://github.com/mcfedr/uuid-paramconverter",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.5.0",
+        "symfony/symfony": "~2.3",
+        "sensio/framework-extra-bundle": "~3.0",
+        "ramsey/uuid": "~2.8"
+    },
+    "authors": [
+        {
+            "name": "Fred Cox",
+            "email": "mcfedr@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/mcfedr/uuid-paramconverter/issues",
+        "source": "https://github.com/mcfedr/uuid-paramconverter"
+    },
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "~4.3",
+        "theseer/phpdox": "~0.7",
+        "phploc/phploc": "~2.0",
+        "pdepend/pdepend": "~2.0",
+        "phpmd/phpmd": "~2.1",
+        "squizlabs/php_codesniffer": "~1.5",
+        "sebastian/phpcpd": "~2.0",
+        "symfony/monolog-bundle": "~2.6"
+    },
+    "autoload": {
+        "psr-4": { "Mcfedr\\UuidParamConverterBundle\\": "src/Mcfedr/UuidParamConverterBundle/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Mcfedr\\UuidParamConverterBundle\\": "tests/Mcfedr/UuidParamConverterBundle/" }
+    }
+}

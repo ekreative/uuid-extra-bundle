@@ -1,0 +1,5 @@
+services:
+    mcfedr_uuid_param_converter.converter:
+        class: Mcfedr\UuidParamConverterBundle\ParamConverter\UuidParamConverter
+        tags:
+            - { name: request.param_converter, converter: uuid }

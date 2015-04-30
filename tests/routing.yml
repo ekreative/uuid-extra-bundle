@@ -1,0 +1,4 @@
+mcfedr_uuid_param_converter:
+    resource: "Mcfedr/UuidParamConverterBundle/Controller/TestController.php"
+    type:     annotation
+    prefix:   /
