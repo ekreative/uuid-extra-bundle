@@ -5,6 +5,7 @@ A convenient bundle for using ramsey/uuid in your controllers
 [![Latest Stable Version](https://poser.pugx.org/mcfedr/uuid-paramconverter/v/stable.png)](https://packagist.org/packages/mcfedr/uuid-paramconverter)
 [![License](https://poser.pugx.org/mcfedr/uuid-paramconverter/license.png)](https://packagist.org/packages/mcfedr/uuid-paramconverter)
 [![Build Status](https://travis-ci.org/mcfedr/uuid-paramconverter.svg?branch=master)](https://travis-ci.org/mcfedr/uuid-paramconverter)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/97f6fe7c-375f-4ba1-b222-700a81bd3b65/mini.png)](https://insight.sensiolabs.com/projects/97f6fe7c-375f-4ba1-b222-700a81bd3b65)
 
 ## Install
 
