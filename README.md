@@ -32,7 +32,7 @@ No config needed
 Use just like any other param converter
 
     /**
-     * @ParamConverter("uuid", class="Rhumsaa\Uuid\Uuid")
+     * @ParamConverter("uuid", class="Ramsey\Uuid\Uuid")
      * @Route("/simple/{uuid}")
      */
     public function simpleAction(Uuid $uuid)
