@@ -40,9 +40,6 @@ class UuidParamConverter implements ParamConverterInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(ParamConverter $configuration)
     {
         $class = $configuration->getClass();
