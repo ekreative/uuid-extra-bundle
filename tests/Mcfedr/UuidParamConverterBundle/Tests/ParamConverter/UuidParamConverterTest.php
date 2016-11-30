@@ -28,7 +28,7 @@ class UuidParamConverterTest extends \PHPUnit_Framework_TestCase
 
     public function testApply()
     {
-        $request = new Request(array(), array(), array('uuid' => 'f13a5b20-9741-4b15-8120-138009d8e0c7'));
+        $request = new Request([], [], ['uuid' => 'f13a5b20-9741-4b15-8120-138009d8e0c7']);
         $config = $this->createConfiguration("Ramsey\\Uuid\\Uuid", "uuid");
 
         $this->converter->apply($request, $config);
@@ -39,7 +39,7 @@ class UuidParamConverterTest extends \PHPUnit_Framework_TestCase
 
     public function testApplyInvalidUuid404Exception()
     {
-        $request = new Request(array(), array(), array('uuid' => 'Invalid uuid Format'));
+        $request = new Request([], [], ['uuid' => 'Invalid uuid Format']);
         $config = $this->createConfiguration("Ramsey\\Uuid\\Uuid", "uuid");
 
         $this->setExpectedException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException', 'Invalid uuid given');
@@ -48,7 +48,7 @@ class UuidParamConverterTest extends \PHPUnit_Framework_TestCase
 
     public function testApplyOptionalWithEmptyAttribute()
     {
-        $request = new Request(array(), array(), array('uuid' => null));
+        $request = new Request([], [], ['uuid' => null]);
         $config = $this->createConfiguration('DateTime', 'uuid');
         $config->expects($this->once())
             ->method('isOptional')
@@ -62,7 +62,7 @@ class UuidParamConverterTest extends \PHPUnit_Framework_TestCase
     {
         $config = $this
             ->getMockBuilder('Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter')
-            ->setMethods(array('getClass', 'getAliasName', 'getOptions', 'getName', 'allowArray', 'isOptional'))
+            ->setMethods(['getClass', 'getAliasName', 'getOptions', 'getName', 'allowArray', 'isOptional'])
             ->disableOriginalConstructor()
             ->getMock();
 
