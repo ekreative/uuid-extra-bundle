@@ -6,7 +6,7 @@
     "homepage": "https://github.com/mcfedr/uuid-paramconverter",
     "license": "MIT",
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=5.5.9",
         "symfony/symfony": "^2.8|^3.0",
         "sensio/framework-extra-bundle": "^3.0",
         "ramsey/uuid": "^3.0"
@@ -31,5 +31,10 @@
     },
     "autoload-dev": {
         "psr-4": { "Mcfedr\\UuidParamConverterBundle\\": "tests/Mcfedr/UuidParamConverterBundle/" }
+    },
+    "config": {
+        "platform": {
+            "php": "5.5.9"
+        }
     }
 }
