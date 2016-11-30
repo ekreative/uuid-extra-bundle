@@ -16,7 +16,7 @@ class UuidParamConverterTest extends \PHPUnit_Framework_TestCase
 
     public function testSupports()
     {
-        $config = $this->createConfiguration("Rhumsaa\\Uuid\\Uuid");
+        $config = $this->createConfiguration("Ramsey\\Uuid\\Uuid");
         $this->assertTrue($this->converter->supports($config));
 
         $config = $this->createConfiguration(__CLASS__);
@@ -29,18 +29,18 @@ class UuidParamConverterTest extends \PHPUnit_Framework_TestCase
     public function testApply()
     {
         $request = new Request(array(), array(), array('uuid' => 'f13a5b20-9741-4b15-8120-138009d8e0c7'));
-        $config = $this->createConfiguration("Rhumsaa\\Uuid\\Uuid", "uuid");
+        $config = $this->createConfiguration("Ramsey\\Uuid\\Uuid", "uuid");
 
         $this->converter->apply($request, $config);
 
-        $this->assertInstanceOf("Rhumsaa\\Uuid\\Uuid", $request->attributes->get('uuid'));
+        $this->assertInstanceOf("Ramsey\\Uuid\\Uuid", $request->attributes->get('uuid'));
         $this->assertEquals('f13a5b20-9741-4b15-8120-138009d8e0c7', $request->attributes->get('uuid')->toString());
     }
 
     public function testApplyInvalidUuid404Exception()
     {
         $request = new Request(array(), array(), array('uuid' => 'Invalid uuid Format'));
-        $config = $this->createConfiguration("Rhumsaa\\Uuid\\Uuid", "uuid");
+        $config = $this->createConfiguration("Ramsey\\Uuid\\Uuid", "uuid");
 
         $this->setExpectedException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException', 'Invalid uuid given');
         $this->converter->apply($request, $config);
