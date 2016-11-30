@@ -6,10 +6,10 @@
     "homepage": "https://github.com/mcfedr/uuid-paramconverter",
     "license": "MIT",
     "require": {
-        "php": ">=5.5.0",
-        "symfony/symfony": "~2.3",
-        "sensio/framework-extra-bundle": "~3.0",
-        "ramsey/uuid": "~2.8"
+        "php": ">=5.5.9",
+        "symfony/symfony": "^2.8|^3.0",
+        "sensio/framework-extra-bundle": "^3.0",
+        "ramsey/uuid": "^3.0"
     },
     "authors": [
         {
@@ -23,13 +23,18 @@
     },
     "minimum-stability": "stable",
     "require-dev": {
-        "phpunit/phpunit": "~4.3",
-        "symfony/monolog-bundle": "~2.6"
+        "phpunit/phpunit": "^4.3",
+        "symfony/monolog-bundle": "^3.0"
     },
     "autoload": {
         "psr-4": { "Mcfedr\\UuidParamConverterBundle\\": "src/Mcfedr/UuidParamConverterBundle/" }
     },
     "autoload-dev": {
         "psr-4": { "Mcfedr\\UuidParamConverterBundle\\": "tests/Mcfedr/UuidParamConverterBundle/" }
+    },
+    "config": {
+        "platform": {
+            "php": "5.5.9"
+        }
     }
 }

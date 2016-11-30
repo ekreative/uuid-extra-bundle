@@ -2,7 +2,7 @@
 
 namespace Mcfedr\UuidParamConverterBundle\Controller;
 
-use Rhumsaa\Uuid\Uuid;
+use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class TestController
 {
     /**
-     * @ParamConverter("uuid", class="Rhumsaa\Uuid\Uuid")
+     * @ParamConverter("uuid", class="Ramsey\Uuid\Uuid")
      * @Route("/simple/{uuid}")
      */
     public function simpleAction(Uuid $uuid)
@@ -19,7 +19,7 @@ class TestController
     }
 
     /**
-     * @ParamConverter("uuid", class="Rhumsaa\Uuid\Uuid")
+     * @ParamConverter("uuid", class="Ramsey\Uuid\Uuid")
      * @Route("/optional/{uuid}")
      */
     public function optionalAction(Uuid $uuid = null)
