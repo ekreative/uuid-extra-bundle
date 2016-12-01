@@ -26,4 +26,20 @@ class TestController
     {
         return new Response($uuid ? $uuid->toString() : null);
     }
+
+    /**
+     * @Route("/automatic/{uuid}")
+     */
+    public function automaticAction(Uuid $uuid)
+    {
+        return new Response($uuid->toString());
+    }
+
+    /**
+     * @Route("/optionalAutomatic/{uuid}")
+     */
+    public function optionalAutomaticAction(Uuid $uuid = null)
+    {
+        return new Response($uuid ? $uuid->toString() : null);
+    }
 }
