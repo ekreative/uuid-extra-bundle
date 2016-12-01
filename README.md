@@ -39,3 +39,23 @@ Use just like any other param converter
     {
         return new Response($uuid->toString());
     }
+
+Most of the time its going to work automatically, as long as you use type hinting on your action
+
+    /**
+     * @Route("/automatic/{uuid}")
+     */
+    public function simpleAction(Uuid $uuid)
+    {
+        return new Response($uuid->toString());
+    }
+    
+Also works for optional params
+
+    /**
+     * @Route("/optional/{uuid}")
+     */
+    public function simpleAction(Uuid $uuid = null)
+    {
+        return new Response($uuid ? $uuid->toString() : 'no uuid');
+    }
