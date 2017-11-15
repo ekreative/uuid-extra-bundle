@@ -9,12 +9,12 @@ class TestKernel extends Symfony\Component\HttpKernel\Kernel
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Mcfedr\UuidParamConverterBundle\McfedrUuidParamConverterBundle()
+            new Mcfedr\UuidParamConverterBundle\McfedrUuidParamConverterBundle(),
         ];
     }
 
     public function registerContainerConfiguration(\Symfony\Component\Config\Loader\LoaderInterface $loader)
     {
-        $loader->load(__DIR__ . '/config_test.yml');
+        $loader->load(__DIR__.'/config_test.yml');
     }
 }
