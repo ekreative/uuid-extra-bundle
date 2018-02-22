@@ -3,6 +3,8 @@
 namespace Mcfedr\UuidParamConverterBundle\Tests\ParamConverter;
 
 use Mcfedr\UuidParamConverterBundle\ParamConverter\UuidParamConverter;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class UuidParamConverterTest extends \PHPUnit_Framework_TestCase
@@ -16,7 +18,10 @@ class UuidParamConverterTest extends \PHPUnit_Framework_TestCase
 
     public function testSupports()
     {
-        $config = $this->createConfiguration('Ramsey\\Uuid\\Uuid');
+        $config = $this->createConfiguration(Uuid::class);
+        $this->assertTrue($this->converter->supports($config));
+
+        $config = $this->createConfiguration(UuidInterface::class);
         $this->assertTrue($this->converter->supports($config));
 
         $config = $this->createConfiguration(__CLASS__);
@@ -29,18 +34,18 @@ class UuidParamConverterTest extends \PHPUnit_Framework_TestCase
     public function testApply()
     {
         $request = new Request([], [], ['uuid' => 'f13a5b20-9741-4b15-8120-138009d8e0c7']);
-        $config = $this->createConfiguration('Ramsey\\Uuid\\Uuid', 'uuid');
+        $config = $this->createConfiguration(Uuid::class, 'uuid');
 
         $this->converter->apply($request, $config);
 
-        $this->assertInstanceOf('Ramsey\\Uuid\\Uuid', $request->attributes->get('uuid'));
+        $this->assertInstanceOf(Uuid::class, $request->attributes->get('uuid'));
         $this->assertEquals('f13a5b20-9741-4b15-8120-138009d8e0c7', $request->attributes->get('uuid')->toString());
     }
 
     public function testApplyInvalidUuid404Exception()
     {
         $request = new Request([], [], ['uuid' => 'Invalid uuid Format']);
-        $config = $this->createConfiguration('Ramsey\\Uuid\\Uuid', 'uuid');
+        $config = $this->createConfiguration(Uuid::class, 'uuid');
 
         $this->setExpectedException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException', 'Invalid uuid given');
         $this->converter->apply($request, $config);
