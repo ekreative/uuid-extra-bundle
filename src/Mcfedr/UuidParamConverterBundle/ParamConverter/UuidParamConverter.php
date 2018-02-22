@@ -45,6 +45,6 @@ class UuidParamConverter implements ParamConverterInterface
     {
         $class = $configuration->getClass();
 
-        return $class === Uuid::class || $class === UuidInterface::class;
+        return Uuid::class === $class || UuidInterface::class === $class;
     }
 }

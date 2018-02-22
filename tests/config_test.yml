@@ -5,9 +5,7 @@ framework:
     router:
         resource: "%kernel.root_dir%/routing.yml"
         strict_requirements: ~
-    validation:      { enable_annotations: true }
     secret: 'fake_secret'
-    form: ~
 
 monolog:
     handlers:
