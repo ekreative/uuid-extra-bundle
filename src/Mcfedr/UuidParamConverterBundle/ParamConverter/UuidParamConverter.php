@@ -3,6 +3,7 @@
 namespace Mcfedr\UuidParamConverterBundle\ParamConverter;
 
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,6 +45,6 @@ class UuidParamConverter implements ParamConverterInterface
     {
         $class = $configuration->getClass();
 
-        return $class === Uuid::class || is_subclass_of($class, Uuid::class);
+        return $class === Uuid::class || $class === UuidInterface::class;
     }
 }
