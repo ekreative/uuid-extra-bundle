@@ -1,8 +1,0 @@
-services:
-    Mcfedr\UuidExtraBundle\ParamConverter\UuidParamConverter:
-        tags:
-            - { name: request.param_converter, converter: uuid }
-
-    Mcfedr\UuidExtraBundle\Serializer\UuidNormalizer:
-        tags:
-            - { name: serializer.normalizer }
