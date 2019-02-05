@@ -1,14 +1,19 @@
 <?php
 
-namespace Mcfedr\UuidParamConverterBundle\Tests\ParamConverter;
+declare(strict_types=1);
 
-use Mcfedr\UuidParamConverterBundle\ParamConverter\UuidParamConverter;
+namespace Mcfedr\UuidExtraBundle\Tests\ParamConverter;
+
+use Mcfedr\UuidExtraBundle\ParamConverter\UuidParamConverter;
+use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class UuidParamConverterTest extends \PHPUnit_Framework_TestCase
+class UuidParamConverterTest extends TestCase
 {
+    /** @var UuidParamConverter */
     private $converter;
 
     public function setUp()
@@ -47,7 +52,8 @@ class UuidParamConverterTest extends \PHPUnit_Framework_TestCase
         $request = new Request([], [], ['uuid' => 'Invalid uuid Format']);
         $config = $this->createConfiguration(Uuid::class, 'uuid');
 
-        $this->setExpectedException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException', 'Invalid uuid given');
+        $this->expectException(NotFoundHttpException::class);
+        $this->expectExceptionMessage('Invalid uuid given');
         $this->converter->apply($request, $config);
     }
 

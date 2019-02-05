@@ -1,6 +1,8 @@
 <?php
 
-namespace Mcfedr\UuidParamConverterBundle\ParamConverter;
+declare(strict_types=1);
+
+namespace Mcfedr\UuidExtraBundle\ParamConverter;
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -45,6 +47,6 @@ class UuidParamConverter implements ParamConverterInterface
     {
         $class = $configuration->getClass();
 
-        return Uuid::class === $class || UuidInterface::class === $class;
+        return UuidInterface::class === $class || Uuid::class === $class;
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 class TestKernel extends Symfony\Component\HttpKernel\Kernel
 {
@@ -9,7 +10,7 @@ class TestKernel extends Symfony\Component\HttpKernel\Kernel
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Mcfedr\UuidParamConverterBundle\McfedrUuidParamConverterBundle(),
+            new Mcfedr\UuidExtraBundle\McfedrExtraBundle(),
         ];
     }
 

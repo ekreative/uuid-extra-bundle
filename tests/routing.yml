@@ -1,4 +1,4 @@
-mcfedr_uuid_param_converter:
-    resource: "Mcfedr/UuidParamConverterBundle/Controller/TestController.php"
+mcfedr_extra_converter:
+    resource: "Mcfedr/UuidExtraBundle/Controller/TestController.php"
     type:     annotation
     prefix:   /

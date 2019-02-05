@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="tests/bootstrap.php" colors="true">
+<phpunit bootstrap="vendor/autoload.php" colors="true">
     <testsuites>
         <testsuite name="Uuid Param Converter Bundle Test Suite">
-            <directory>tests/Mcfedr/UuidParamConverterBundle/Tests/</directory>
+            <directory>tests/Mcfedr/UuidExtraBundle/Tests/</directory>
         </testsuite>
     </testsuites>
 
     <php>
-        <server name="KERNEL_DIR" value="tests/" />
         <server name="KERNEL_CLASS" value="TestKernel" />
     </php>
 
     <filter>
         <whitelist>
-            <directory suffix=".php">src/Mcfedr/UuidParamConverterBundle/</directory>
+            <directory suffix=".php">src/Mcfedr/UuidExtraBundle/</directory>
         </whitelist>
     </filter>
 </phpunit>

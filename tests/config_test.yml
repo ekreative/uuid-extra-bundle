@@ -6,8 +6,22 @@ framework:
         resource: "%kernel.root_dir%/routing.yml"
         strict_requirements: ~
     secret: 'fake_secret'
+    serializer: true
 
 monolog:
     handlers:
         main:
             type: console
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Mcfedr\UuidExtraBundle\Controller\TestController:
+        autowire: true
+        autoconfigure: true
+
+    Mcfedr\UuidExtraBundle\Controller\:
+        resource: '../tests/Mcfedr/UuidExtraBundle/Controller'
+        tags: ['controller.service_arguments']

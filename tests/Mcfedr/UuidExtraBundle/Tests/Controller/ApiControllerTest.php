@@ -1,6 +1,8 @@
 <?php
 
-namespace Mcfedr\UuidParamConverterBundle\Tests\Controller;
+declare(strict_types=1);
+
+namespace Mcfedr\UuidExtraBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -58,5 +60,15 @@ class ApiControllerTest extends WebTestCase
         $client->request('GET', '/optionalAutomatic');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testSerializer()
+    {
+        $client = self::createClient();
+
+        $client->request('GET', '/serialized');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals('"f13a5b20-9741-4b15-8120-138009d8e0c7"', $client->getResponse()->getContent());
     }
 }

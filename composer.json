@@ -1,12 +1,12 @@
 {
-    "name": "mcfedr/uuid-paramconverter",
+    "name": "mcfedr/uuid-extra-bundle",
     "description": "A sensi paramconverter for receiving uuids as url params",
     "type": "symfony-bundle",
     "keywords": ["uuid", "identifier", "guid", "paramconverter", "param", "converter", "symfony", "bundle"],
-    "homepage": "https://github.com/mcfedr/uuid-paramconverter",
+    "homepage": "https://github.com/mcfedr/uuid-extra-bundle",
     "license": "MIT",
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.1",
         "symfony/framework-bundle": "^2.8|^3.0|^4.0",
         "sensio/framework-extra-bundle": "^3.0|^4.0|^5.0",
         "ramsey/uuid": "^3.0"
@@ -18,21 +18,23 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/mcfedr/uuid-paramconverter/issues",
-        "source": "https://github.com/mcfedr/uuid-paramconverter"
+        "issues": "https://github.com/mcfedr/uuid-extra-bundle/issues",
+        "source": "https://github.com/mcfedr/uuid-extra-bundle"
     },
     "minimum-stability": "stable",
     "require-dev": {
-        "phpunit/phpunit": "^4.3|^5.3",
-        "symfony/monolog-bundle": "^3.0",
         "symfony/browser-kit": "^3.0|^4.0",
-        "friendsofphp/php-cs-fixer": "^2.2"
+        "phpunit/phpunit": "^7",
+        "symfony/monolog-bundle": "^3.0|^4.0",
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "symfony/form": "^4.2",
+        "symfony/serializer": "^4.2"
     },
     "autoload": {
-        "psr-4": { "Mcfedr\\UuidParamConverterBundle\\": "src/Mcfedr/UuidParamConverterBundle/" }
+        "psr-4": { "Mcfedr\\UuidExtraBundle\\": "src/Mcfedr/UuidExtraBundle/" }
     },
     "autoload-dev": {
-        "psr-4": { "Mcfedr\\UuidParamConverterBundle\\": "tests/Mcfedr/UuidParamConverterBundle/" },
-        "classmap": ["tests/TestKernel.php"]
+      "psr-4": { "Mcfedr\\UuidExtraBundle\\": "tests/Mcfedr/UuidExtraBundle/" },
+      "classmap": ["tests/TestKernel.php"]
     }
 }
