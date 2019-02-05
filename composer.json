@@ -1,8 +1,8 @@
 {
     "name": "mcfedr/uuid-extra-bundle",
-    "description": "A sensi paramconverter for receiving uuids as url params",
+    "description": "Paramconverter, Normalizer and Form Type for Ramsey Uuid",
     "type": "symfony-bundle",
-    "keywords": ["uuid", "identifier", "guid", "paramconverter", "param", "converter", "symfony", "bundle"],
+    "keywords": ["uuid", "identifier", "guid", "paramconverter", "param", "converter", "symfony", "bundle", "ramsey", "form", "normalizer", "denormalizer"],
     "homepage": "https://github.com/mcfedr/uuid-extra-bundle",
     "license": "MIT",
     "require": {
@@ -29,7 +29,7 @@
         "friendsofphp/php-cs-fixer": "^2.14",
         "symfony/form": "^3.0|^4.0",
         "symfony/serializer": "^3.0|^4.0",
-        "symfony/yaml": "^4.2"
+        "symfony/yaml": "^3.0|^4.0"
     },
     "autoload": {
         "psr-4": { "Mcfedr\\UuidExtraBundle\\": "src/Mcfedr/UuidExtraBundle/" }
