@@ -24,7 +24,7 @@ public function registerBundles()
 {
     $bundles = array(
         ...
-        new Mcfedr\UuidExtraBundle\McfedrUuidExtraBundle()
+        new Mcfedr\UuidExtraBundle\McfedrExtraBundle()
 ```
 
 ## Config
