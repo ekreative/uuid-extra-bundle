@@ -5,7 +5,6 @@ A convenient bundle for using ramsey/uuid in your project
 [![Latest Stable Version](https://poser.pugx.org/mcfedr/uuid-extra-bundle/v/stable.png)](https://packagist.org/packages/mcfedr/uuid-extra-bundle)
 [![License](https://poser.pugx.org/mcfedr/uuid-extra-bundle/license.png)](https://packagist.org/packages/mcfedr/uuid-extra-bundle)
 [![Build Status](https://travis-ci.org/mcfedr/uuid-extra-bundle.svg?branch=master)](https://travis-ci.org/mcfedr/uuid-extra-bundle)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/97f6fe7c-375f-4ba1-b222-700a81bd3b65/mini.png)](https://insight.sensiolabs.com/projects/97f6fe7c-375f-4ba1-b222-700a81bd3b65)
 
 ## Install
 
