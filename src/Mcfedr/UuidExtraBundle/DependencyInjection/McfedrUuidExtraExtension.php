@@ -20,5 +20,9 @@ class McfedrUuidExtraExtension extends Extension
     {
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        if (class_exists('Symfony\Component\Form\FormInterface')) {
+            $loader->load('services_form.xml');
+        }
     }
 }
