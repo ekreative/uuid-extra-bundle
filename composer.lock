@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f7582a0f06a264b67d3e5fe9cf60d83d",
+    "content-hash": "225363a365d7e76ddda32c76e6e092c6",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3207,67 +3207,6 @@
             ],
             "description": "PHPUnit extensions and rules for PHPStan",
             "time": "2018-12-22T14:05:04+00:00"
-        },
-        {
-            "name": "phpstan/phpstan-symfony",
-            "version": "0.11.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "c5f7d3d7fe9b599ac083f481fc082af166926cf8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/c5f7d3d7fe9b599ac083f481fc082af166926cf8",
-                "reference": "c5f7d3d7fe9b599ac083f481fc082af166926cf8",
-                "shasum": ""
-            },
-            "require": {
-                "ext-simplexml": "*",
-                "nikic/php-parser": "^4.0",
-                "php": "^7.1",
-                "phpstan/phpstan": "^0.11.1"
-            },
-            "conflict": {
-                "symfony/framework-bundle": "<3.0"
-            },
-            "require-dev": {
-                "consistence/coding-standard": "^3.0.1",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
-                "jakub-onderka/php-parallel-lint": "^1.0",
-                "phing/phing": "^2.16.0",
-                "phpstan/phpstan-phpunit": "^0.11",
-                "phpstan/phpstan-strict-rules": "^0.11",
-                "phpunit/phpunit": "^7.0",
-                "slevomat/coding-standard": "^4.5.2",
-                "squizlabs/php_codesniffer": "^3.3.2",
-                "symfony/framework-bundle": "^3.0 || ^4.0",
-                "symfony/serializer": "^3|^4"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.11-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PHPStan\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Lukáš Unger",
-                    "email": "looky.msc@gmail.com",
-                    "homepage": "https://lookyman.net"
-                }
-            ],
-            "description": "Symfony Framework extensions and rules for PHPStan",
-            "time": "2019-02-13T19:42:11+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
