@@ -97,3 +97,14 @@ Does everything you'd expect
 ```php
 ->add('uuid', UuidType:class)
 ```
+
+And if your model has
+
+```php
+/**
+ * @Assert\Uuid
+ */
+private $uuid;
+```
+
+It will automatically use the `UuidType`
