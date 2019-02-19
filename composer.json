@@ -32,7 +32,7 @@
         "symfony/yaml": "^3.0|^4.0",
         "phpstan/phpstan": "^0.11.2",
         "phpstan/phpstan-phpunit": "^0.11.0",
-        "symfony/validator": "^4.2"
+        "symfony/validator": "^3.0|^4.2"
     },
     "autoload": {
         "psr-4": { "Mcfedr\\UuidExtraBundle\\": "src/Mcfedr/UuidExtraBundle/" }

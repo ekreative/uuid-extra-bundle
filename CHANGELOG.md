@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.1.1
+
+- Remove hard dep on symfony/form
+
 ### 3.1.0
 
 - Add Form type, including a type guesser

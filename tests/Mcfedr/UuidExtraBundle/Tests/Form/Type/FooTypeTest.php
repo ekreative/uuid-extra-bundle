@@ -24,7 +24,7 @@ class FooTypeTest extends WebTestCase
             ->getForm();
 
         $element = $form->get('uuid');
-        $this->assertInstanceOf(UuidType::class, $element->getConfig()->getType());
+        $this->assertInstanceOf(UuidType::class, $element->getConfig()->getType()->getInnerType());
 
         $request = Request::create('/', 'POST', [
             'foo' => [
