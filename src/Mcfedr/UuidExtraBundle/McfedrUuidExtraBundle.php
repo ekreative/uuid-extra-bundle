@@ -6,6 +6,6 @@ namespace Mcfedr\UuidExtraBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class McfedrExtraBundle extends Bundle
+class McfedrUuidExtraBundle extends Bundle
 {
 }
