@@ -7,6 +7,8 @@ framework:
         strict_requirements: ~
     secret: 'fake_secret'
     serializer: true
+    form: ~
+    validation: { enable_annotations: true }
 
 monolog:
     handlers:

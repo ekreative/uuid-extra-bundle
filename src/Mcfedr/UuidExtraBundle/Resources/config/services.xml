@@ -11,5 +11,9 @@
         <service id="Mcfedr\UuidExtraBundle\Serializer\UuidNormalizer">
             <tag name="serializer.normalizer"/>
         </service>
+        <service id="Mcfedr\UuidExtraBundle\Form\ValidatorTypeGuesser">
+            <tag name="form.type_guesser" />
+            <argument type="service" id="validator.mapping.class_metadata_factory" />
+        </service>
     </services>
 </container>
