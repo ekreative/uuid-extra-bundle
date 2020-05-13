@@ -1,5 +1,13 @@
 # Changelog
 
+### 4.0.0
+
+- Moved the project to ekreative/uuid-extra-bundle.
+- The namespace of the project has been changed to
+  Ekreative\UuidExtraBundle from Mcfedr\UuidExtraBundle.
+  It should be really quick to upgrade - the only change in this
+  version is the new namespace.
+
 ### 3.2.1
 
 - Fix travis testing
