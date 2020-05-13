@@ -1,5 +1,10 @@
 # Changelog
 
+### 3.2.0
+
+- Enable Symfony 5
+- Enable uuid 4
+
 ### 3.1.1
 
 - Remove hard dep on symfony/form
