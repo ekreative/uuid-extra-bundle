@@ -2,16 +2,16 @@
 
 A convenient bundle for using ramsey/uuid in your project
 
-[![Latest Stable Version](https://poser.pugx.org/mcfedr/uuid-extra-bundle/v/stable.png)](https://packagist.org/packages/mcfedr/uuid-extra-bundle)
-[![License](https://poser.pugx.org/mcfedr/uuid-extra-bundle/license.png)](https://packagist.org/packages/mcfedr/uuid-extra-bundle)
-[![Build Status](https://travis-ci.org/mcfedr/uuid-extra-bundle.svg?branch=master)](https://travis-ci.org/mcfedr/uuid-extra-bundle)
+[![Latest Stable Version](https://poser.pugx.org/ekreative/uuid-extra-bundle/v/stable.png)](https://packagist.org/packages/ekreative/uuid-extra-bundle)
+[![License](https://poser.pugx.org/ekreative/uuid-extra-bundle/license.png)](https://packagist.org/packages/ekreative/uuid-extra-bundle)
+[![Build Status](https://travis-ci.org/ekreative/uuid-extra-bundle.svg?branch=master)](https://travis-ci.org/ekreative/uuid-extra-bundle)
 
 ## Install
 
 ### Composer
 
 ```bash
-php composer.phar require mcfedr/uuid-extra-bundle
+php composer.phar require ekreative/uuid-extra-bundle
 ```
 
 ### AppKernel
@@ -23,7 +23,7 @@ public function registerBundles()
 {
     $bundles = array(
         ...
-        new Mcfedr\UuidExtraBundle\McfedrUuidExtraBundle()
+        new Ekreative\UuidExtraBundle\EkreativeUuidExtraBundle()
 ```
 
 ## Config

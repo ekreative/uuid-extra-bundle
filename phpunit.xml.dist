@@ -3,7 +3,7 @@
 <phpunit bootstrap="vendor/autoload.php" colors="true">
     <testsuites>
         <testsuite name="Uuid Param Converter Bundle Test Suite">
-            <directory>tests/Mcfedr/UuidExtraBundle/Tests/</directory>
+            <directory>tests/Ekreative/UuidExtraBundle/Tests/</directory>
         </testsuite>
     </testsuites>
 
@@ -13,7 +13,7 @@
 
     <filter>
         <whitelist>
-            <directory suffix=".php">src/Mcfedr/UuidExtraBundle/</directory>
+            <directory suffix=".php">src/Ekreative/UuidExtraBundle/</directory>
         </whitelist>
     </filter>
 </phpunit>
