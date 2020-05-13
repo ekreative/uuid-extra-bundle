@@ -16,7 +16,7 @@ class UuidParamConverterTest extends TestCase
     /** @var UuidParamConverter */
     private $converter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->converter = new UuidParamConverter();
     }
@@ -63,7 +63,7 @@ class UuidParamConverterTest extends TestCase
         $config = $this->createConfiguration('DateTime', 'uuid');
         $config->expects($this->once())
             ->method('isOptional')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->assertFalse($this->converter->apply($request, $config));
         $this->assertNull($request->attributes->get('uuid'));
@@ -80,12 +80,12 @@ class UuidParamConverterTest extends TestCase
         if (null !== $name) {
             $config->expects($this->any())
                 ->method('getName')
-                ->will($this->returnValue($name));
+                ->willReturn($name);
         }
         if (null !== $class) {
             $config->expects($this->any())
                 ->method('getClass')
-                ->will($this->returnValue($class));
+                ->willReturn($class);
         }
 
         return $config;

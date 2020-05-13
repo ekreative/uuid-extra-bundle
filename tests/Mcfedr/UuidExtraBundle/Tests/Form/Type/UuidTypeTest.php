@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Mcfedr\UuidExtraBundle\Tests\Form\Type;
 
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\Form\Tests\Extension\Core\Type\BaseTypeTest;
+use Symfony\Component\Form\Test\TypeTestCase;
 
-class UuidTypeTest extends BaseTypeTest
+//use Symfony\Component\Form\Tests\Extension\Core\Type\BaseTypeTest;
+
+class UuidTypeTest extends TypeTestCase
 {
     const TESTED_TYPE = 'Mcfedr\UuidExtraBundle\Form\Type\UuidType';
 
@@ -23,7 +25,12 @@ class UuidTypeTest extends BaseTypeTest
 
     public function testSubmitNull($expected = null, $norm = null, $view = null)
     {
-        parent::testSubmitNull($expected, $norm, '');
+        $form = $this->factory->create(static::TESTED_TYPE);
+
+        $form->submit(null);
+
+        $this->assertNull($form->getData());
+        $this->assertSame('', $form->getViewData());
     }
 
     public function testSubmitNullUsesDefaultEmptyData($emptyData = 'f13a5b20-9741-4b15-8120-138009d8e0c7', $expectedData = 'f13a5b20-9741-4b15-8120-138009d8e0c7')

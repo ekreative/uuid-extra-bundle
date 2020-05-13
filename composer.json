@@ -7,9 +7,9 @@
     "license": "MIT",
     "require": {
         "php": ">=7.1",
-        "symfony/framework-bundle": "^2.8|^3.0|^4.0",
+        "symfony/framework-bundle": "^3.0|^4.0|^5.0",
         "sensio/framework-extra-bundle": "^3.0|^4.0|^5.0",
-        "ramsey/uuid": "^3.0"
+        "ramsey/uuid": "^3.0|^4.0"
     },
     "authors": [
         {
@@ -23,16 +23,17 @@
     },
     "minimum-stability": "stable",
     "require-dev": {
-        "symfony/browser-kit": "^3.0|^4.0",
-        "phpunit/phpunit": "^7",
+        "symfony/browser-kit": "^3.0|^4.0|^5.0",
+        "phpunit/phpunit": "^9",
         "symfony/monolog-bundle": "^3.0|^4.0",
-        "friendsofphp/php-cs-fixer": "^2.14",
-        "symfony/form": "^3.0|^4.0",
-        "symfony/serializer": "^3.0|^4.0",
-        "symfony/yaml": "^3.0|^4.0",
-        "phpstan/phpstan": "^0.11.2",
-        "phpstan/phpstan-phpunit": "^0.11.0",
-        "symfony/validator": "^3.0|^4.2"
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "symfony/form": "^3.0|^4.0|^5.0",
+        "symfony/serializer": "^3.0|^4.0|^5.0",
+        "symfony/yaml": "^3.0|^4.0|^5.0",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-phpunit": "^0.12",
+        "symfony/validator": "^3.0|^4.2|^5.0",
+        "phpstan/extension-installer": "^1.0"
     },
     "autoload": {
         "psr-4": { "Mcfedr\\UuidExtraBundle\\": "src/Mcfedr/UuidExtraBundle/" }
