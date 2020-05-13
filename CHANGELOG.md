@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.2.1
+
+- Fix travis testing
+
 ### 3.2.0
 
 - Enable Symfony 5
