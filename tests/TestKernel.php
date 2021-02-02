@@ -14,7 +14,7 @@ class TestKernel extends Symfony\Component\HttpKernel\Kernel
         ];
     }
 
-    public function registerContainerConfiguration(\Symfony\Component\Config\Loader\LoaderInterface $loader)
+    public function registerContainerConfiguration(Symfony\Component\Config\Loader\LoaderInterface $loader)
     {
         $loader->load(__DIR__.'/config_test.yml');
     }

@@ -16,7 +16,7 @@ class UuidParamConverterTest extends TestCase
     /** @var UuidParamConverter */
     private $converter;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->converter = new UuidParamConverter();
     }
