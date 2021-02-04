@@ -16,7 +16,7 @@ class UuidParamConverterTest extends TestCase
     /** @var UuidParamConverter */
     private $converter;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->converter = new UuidParamConverter();
     }
@@ -43,7 +43,7 @@ class UuidParamConverterTest extends TestCase
 
         $this->converter->apply($request, $config);
 
-        $this->assertInstanceOf(Uuid::class, $request->attributes->get('uuid'));
+        $this->assertInstanceOf(UuidInterface::class, $request->attributes->get('uuid'));
         $this->assertEquals('f13a5b20-9741-4b15-8120-138009d8e0c7', $request->attributes->get('uuid')->toString());
     }
 
