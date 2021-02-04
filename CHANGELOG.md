@@ -1,5 +1,9 @@
 # Changelog
 
+### 4.1.0
+
+- Improved support for ramsey/uuid >= 4.1
+
 ### 4.0.0
 
 - Moved the project to ekreative/uuid-extra-bundle.
