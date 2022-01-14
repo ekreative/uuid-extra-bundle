@@ -1,6 +1,5 @@
 framework:
     test: ~
-    session: ~
     router:
         resource: "%kernel.project_dir%/tests/routing.yml"
         strict_requirements: ~
