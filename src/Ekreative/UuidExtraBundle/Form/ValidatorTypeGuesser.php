@@ -16,17 +16,14 @@ class ValidatorTypeGuesser extends \Symfony\Component\Form\Extension\Validator\V
     /**
      * {@inheritdoc}
      */
-    public function guessType($class, $property)
+    public function guessType($class, $property): ?TypeGuess
     {
         return $this->guess($class, $property, function (Constraint $constraint) {
             return $this->guessTypeForConstraint($constraint);
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function guessRequired($class, $property)
+    public function guessRequired($class, $property): ?ValueGuess
     {
         return $this->guess($class, $property, function (Constraint $constraint) {
             return $this->guessRequiredForConstraint($constraint);
@@ -35,71 +32,50 @@ class ValidatorTypeGuesser extends \Symfony\Component\Form\Extension\Validator\V
         }, false);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function guessMaxLength($class, $property)
+    public function guessMaxLength($class, $property): ?ValueGuess
     {
         return $this->guess($class, $property, function (Constraint $constraint) {
             return $this->guessMaxLengthForConstraint($constraint);
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function guessPattern($class, $property)
+    public function guessPattern($class, $property): ?ValueGuess
     {
         return $this->guess($class, $property, function (Constraint $constraint) {
             return $this->guessPatternForConstraint($constraint);
         });
     }
 
-    /**
-     * Guesses a field class name for a given constraint.
-     *
-     * @return TypeGuess|null The guessed field class and options
-     */
-    public function guessTypeForConstraint(Constraint $constraint)
+    public function guessTypeForConstraint(Constraint $constraint): ?TypeGuess
     {
-        switch (\get_class($constraint)) {
-            case Uuid::class:
-                return new TypeGuess(UuidType::class, [], Guess::HIGH_CONFIDENCE);
+        if (\get_class($constraint) !== Uuid::class) {
+            return null;
         }
+
+        return new TypeGuess(UuidType::class, [], Guess::HIGH_CONFIDENCE);
     }
 
-    /**
-     * Guesses whether a field is required based on the given constraint.
-     *
-     * @return ValueGuess|null The guess whether the field is required
-     */
-    public function guessRequiredForConstraint(Constraint $constraint)
+    /** @return null */
+    public function guessRequiredForConstraint(Constraint $constraint): ?ValueGuess
     {
+        return null;
     }
 
-    /**
-     * Guesses a field's maximum length based on the given constraint.
-     *
-     * @return ValueGuess|null The guess for the maximum length
-     */
-    public function guessMaxLengthForConstraint(Constraint $constraint)
+    public function guessMaxLengthForConstraint(Constraint $constraint): ?ValueGuess
     {
-        switch (\get_class($constraint)) {
-            case Uuid::class:
-                return new ValueGuess(36, Guess::HIGH_CONFIDENCE);
+        if (\get_class($constraint) !== Uuid::class) {
+            return new ValueGuess(36, Guess::HIGH_CONFIDENCE);
         }
+
+        return null;
     }
 
-    /**
-     * Guesses a field's pattern based on the given constraint.
-     *
-     * @return ValueGuess|null The guess for the pattern
-     */
-    public function guessPatternForConstraint(Constraint $constraint)
+    public function guessPatternForConstraint(Constraint $constraint): ?ValueGuess
     {
-        switch (\get_class($constraint)) {
-            case Uuid::class:
-                return new ValueGuess(\Ramsey\Uuid\Uuid::VALID_PATTERN, Guess::HIGH_CONFIDENCE);
+        if (\get_class($constraint) !== Uuid::class) {
+            return new ValueGuess(\Ramsey\Uuid\Uuid::VALID_PATTERN, Guess::HIGH_CONFIDENCE);
         }
+
+        return null;
     }
 }

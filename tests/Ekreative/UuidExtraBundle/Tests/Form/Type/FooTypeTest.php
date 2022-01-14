@@ -19,7 +19,8 @@ class FooTypeTest extends WebTestCase
 
         $f = new Foo();
 
-        $form = $client->getContainer()->get('form.factory')
+        $form = $client->getContainer()
+            ->get('test.form.factory')
             ->createBuilder(FooType::class, $f)
             ->getForm();
 

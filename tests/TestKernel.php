@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class TestKernel extends Symfony\Component\HttpKernel\Kernel
 {
-    public function registerBundles()
+    public function registerBundles(): array
     {
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -14,7 +14,7 @@ class TestKernel extends Symfony\Component\HttpKernel\Kernel
         ];
     }
 
-    public function registerContainerConfiguration(Symfony\Component\Config\Loader\LoaderInterface $loader)
+    public function registerContainerConfiguration(Symfony\Component\Config\Loader\LoaderInterface $loader): void
     {
         $loader->load(__DIR__.'/config_test.yml');
     }

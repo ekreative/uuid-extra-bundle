@@ -1,7 +1,6 @@
 framework:
     test: ~
-    session:
-        storage_id: session.storage.mock_file
+    session: ~
     router:
         resource: "%kernel.project_dir%/tests/routing.yml"
         strict_requirements: ~
@@ -28,3 +27,8 @@ services:
     Ekreative\UuidExtraBundle\Controller\:
         resource: '../tests/Ekreative/UuidExtraBundle/Controller'
         tags: ['controller.service_arguments']
+
+    # Marking an alias of this service `public`, so we can access it in tests, without it being inlined/removed
+    'test.form.factory':
+        alias: 'form.factory'
+        public: true
