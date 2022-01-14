@@ -37,8 +37,27 @@
     },
     "conflict": {
         "ramsey/collection": "<1.2.0",
-        "symfony/dom-crawler": "<4.4.12",
-        "symfony/options-resolver": "<5.3.7"
+        "symfony/browser-kit": "<5.3.7",
+        "symfony/cache": "<5.3.7",
+        "symfony/config": "<5.3.7",
+        "symfony/console": "<5.3.7",
+        "symfony/dependency-injection": "<5.3.7",
+        "symfony/dom-crawler": "<5.3.7",
+        "symfony/error-handler": "<5.3.7",
+        "symfony/event-dispatcher": "<5.3.7",
+        "symfony/filesystem": "<5.3.7",
+        "symfony/finder": "<5.3.7",
+        "symfony/http-foundation": "<5.3.7",
+        "symfony/http-kernel": "<5.3.7",
+        "symfony/monolog-bridge": "<5.3.7",
+        "symfony/options-resolver": "<5.3.7",
+        "symfony/process": "<5.3.7",
+        "symfony/property-access": "<5.3.7",
+        "symfony/property-info": "<5.3.7",
+        "symfony/routing": "<5.3.7",
+        "symfony/stopwatch": "<5.3.7",
+        "symfony/var-dumper": "<5.3.7",
+        "symfony/var-exporter": "<5.3.7"
     },
     "autoload": {
         "psr-4": { "Ekreative\\UuidExtraBundle\\": "src/Ekreative/UuidExtraBundle/" }
