@@ -9,6 +9,7 @@ framework:
     serializer: true
     form: ~
     validation: { enable_annotations: true }
+    property_access: ~
 
 monolog:
     handlers:
