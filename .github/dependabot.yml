@@ -10,7 +10,7 @@
       "directory": "/",
       "package-ecosystem": "composer",
       "schedule": {
-        "interval": "daily"
+        "interval": "weekly"
       },
       "versioning-strategy": "widen"
     },
@@ -18,7 +18,7 @@
       "directory": "/",
       "package-ecosystem": "github-actions",
       "schedule": {
-        "interval": "daily"
+        "interval": "weekly"
       }
     }
   ]
