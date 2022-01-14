@@ -36,7 +36,8 @@
         "phpstan/extension-installer": "^1.1.0"
     },
     "conflict": {
-        "symfony/dom-crawler": "<4.4.12"
+        "symfony/dom-crawler": "<4.4.12",
+        "symfony/options-resolver": "<4.4.30"
     },
     "autoload": {
         "psr-4": { "Ekreative\\UuidExtraBundle\\": "src/Ekreative/UuidExtraBundle/" }
