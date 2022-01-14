@@ -36,6 +36,7 @@
         "phpstan/extension-installer": "^1.1.0"
     },
     "conflict": {
+        "ramsey/collection": "<1.2.0",
         "symfony/dom-crawler": "<4.4.12",
         "symfony/options-resolver": "<5.3.7"
     },
