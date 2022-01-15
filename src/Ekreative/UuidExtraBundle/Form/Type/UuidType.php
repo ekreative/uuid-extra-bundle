@@ -11,12 +11,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class UuidType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(new UuidTransformer());
     }
 
-    public function getParent()
+    /** @return class-string<TextType> */
+    public function getParent(): string
     {
         return TextType::class;
     }

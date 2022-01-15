@@ -9,19 +9,23 @@ use Ekreative\UuidExtraBundle\Form\Type\FooType;
 use Ekreative\UuidExtraBundle\Form\Type\UuidType;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class FooTypeTest extends WebTestCase
 {
-    public function testFoo()
+    public function testFoo(): void
     {
         $client = self::createClient();
 
         $f = new Foo();
 
-        $form = $client->getContainer()
-            ->get('test.form.factory')
-            ->createBuilder(FooType::class, $f)
+        $factory = $client->getContainer()
+            ->get('test.form.factory');
+
+        \assert($factory instanceof FormFactoryInterface);
+
+        $form = $factory->createBuilder(FooType::class, $f)
             ->getForm();
 
         $element = $form->get('uuid');

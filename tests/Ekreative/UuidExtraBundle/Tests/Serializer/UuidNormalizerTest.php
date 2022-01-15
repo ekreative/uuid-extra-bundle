@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Serializer;
 
 class UuidNormalizerTest extends TestCase
 {
-    public function testSerialization()
+    public function testSerialization(): void
     {
         $serializer = new Serializer([new UuidNormalizer()], [new JsonEncoder()]);
         $uuid = Uuid::fromString('f13a5b20-9741-4b15-8120-138009d8e0c7');
@@ -22,7 +22,7 @@ class UuidNormalizerTest extends TestCase
         $this->assertEquals('"f13a5b20-9741-4b15-8120-138009d8e0c7"', $data);
     }
 
-    public function testNormalization()
+    public function testNormalization(): void
     {
         $serializer = new Serializer([new UuidNormalizer()], [new JsonEncoder()]);
         $obj = $serializer->deserialize('"f13a5b20-9741-4b15-8120-138009d8e0c7"', UuidInterface::class, 'json');

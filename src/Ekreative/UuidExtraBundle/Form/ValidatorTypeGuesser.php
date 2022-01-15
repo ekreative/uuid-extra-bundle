@@ -5,43 +5,56 @@ declare(strict_types=1);
 namespace Ekreative\UuidExtraBundle\Form;
 
 use Ekreative\UuidExtraBundle\Form\Type\UuidType;
+use Ramsey\Uuid\Rfc4122\Validator;
+use Ramsey\Uuid\Validator\ValidatorInterface;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Guess\ValueGuess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Uuid;
+use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;
 
 class ValidatorTypeGuesser extends \Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser
 {
+    /** @var ValidatorInterface */
+    private $validator;
+
+    public function __construct(MetadataFactoryInterface $metadataFactory, ValidatorInterface $validator = null)
+    {
+        parent::__construct($metadataFactory);
+
+        $this->validator = $validator ?? new Validator();
+    }
+
     /**
      * {@inheritdoc}
      */
-    public function guessType($class, $property): ?TypeGuess
+    public function guessType(string $class, string $property): ?TypeGuess
     {
-        return $this->guess($class, $property, function (Constraint $constraint) {
+        return $this->guess($class, $property, function (Constraint $constraint): ?TypeGuess {
             return $this->guessTypeForConstraint($constraint);
         });
     }
 
-    public function guessRequired($class, $property): ?ValueGuess
+    public function guessRequired(string $class, string $property): ?ValueGuess
     {
-        return $this->guess($class, $property, function (Constraint $constraint) {
+        return $this->guess($class, $property, function (Constraint $constraint): ?ValueGuess {
             return $this->guessRequiredForConstraint($constraint);
         // If we don't find any constraint telling otherwise, we can assume
             // that a field is not required (with LOW_CONFIDENCE)
         }, false);
     }
 
-    public function guessMaxLength($class, $property): ?ValueGuess
+    public function guessMaxLength(string $class, string $property): ?ValueGuess
     {
-        return $this->guess($class, $property, function (Constraint $constraint) {
+        return $this->guess($class, $property, function (Constraint $constraint): ?ValueGuess {
             return $this->guessMaxLengthForConstraint($constraint);
         });
     }
 
-    public function guessPattern($class, $property): ?ValueGuess
+    public function guessPattern(string $class, string $property): ?ValueGuess
     {
-        return $this->guess($class, $property, function (Constraint $constraint) {
+        return $this->guess($class, $property, function (Constraint $constraint): ?ValueGuess {
             return $this->guessPatternForConstraint($constraint);
         });
     }
@@ -73,9 +86,29 @@ class ValidatorTypeGuesser extends \Symfony\Component\Form\Extension\Validator\V
     public function guessPatternForConstraint(Constraint $constraint): ?ValueGuess
     {
         if (\get_class($constraint) !== Uuid::class) {
-            return new ValueGuess(\Ramsey\Uuid\Uuid::VALID_PATTERN, Guess::HIGH_CONFIDENCE);
+            return new ValueGuess($this->validator->getPattern(), Guess::HIGH_CONFIDENCE);
         }
 
         return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @template T of Guess|null
+     *
+     * @param \Closure(Constraint): T $closure
+     * @param mixed $defaultValue
+     *
+     * @return T|null
+     *
+     * @psalm-suppress MoreSpecificImplementedParamType this method is really just in place to better specify the
+     *                 definition of {@see \Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser::guess()}
+     * @psalm-suppress InvalidReturnStatement the parent definition returns a type that is too generic
+     * @psalm-suppress InvalidReturnType the parent definition returns a type that is too generic
+     */
+    protected function guess(string $class, string $property, \Closure $closure, $defaultValue = null): ?Guess
+    {
+        return parent::guess($class, $property, $closure, $defaultValue);
     }
 }

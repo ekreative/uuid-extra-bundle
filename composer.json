@@ -30,10 +30,9 @@
         "symfony/form": "^5.4.2 || ^6.0.2",
         "symfony/serializer": "^5.4.2 || ^6.0.2",
         "symfony/yaml": "^5.4.2 || ^6.0.2",
-        "phpstan/phpstan": "^1.4.0",
-        "phpstan/phpstan-phpunit": "^1.0.0",
         "symfony/validator": "^5.4.2 || ^6.0.2",
-        "phpstan/extension-installer": "^1.1.0"
+        "vimeo/psalm": "^4.18.1",
+        "psalm/plugin-phpunit": "^0.16.1"
     },
     "conflict": {
         "ramsey/collection": "<1.2.0",

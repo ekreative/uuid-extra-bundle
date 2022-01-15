@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class UuidNormalizer implements NormalizerInterface, DenormalizerInterface
 {
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $type, $format = null, array $context = [])
     {
         try {
             return Uuid::fromString($data);
