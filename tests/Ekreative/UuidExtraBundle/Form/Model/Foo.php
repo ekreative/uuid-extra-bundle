@@ -7,7 +7,7 @@ namespace Ekreative\UuidExtraBundle\Form\Model;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Foo
+final class Foo
 {
     /**
      * @var ?UuidInterface

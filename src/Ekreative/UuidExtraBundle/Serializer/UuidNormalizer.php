@@ -15,6 +15,13 @@ class UuidNormalizer implements NormalizerInterface, DenormalizerInterface
 {
     public function denormalize($data, $type, $format = null, array $context = [])
     {
+        if (! \is_string($data)) {
+            throw new InvalidArgumentException(\sprintf(
+                'Not a valid uuid string - "string" expected, "%s" given',
+                gettype($data)
+            ));
+        }
+
         try {
             return Uuid::fromString($data);
         } catch (\InvalidArgumentException $e) {

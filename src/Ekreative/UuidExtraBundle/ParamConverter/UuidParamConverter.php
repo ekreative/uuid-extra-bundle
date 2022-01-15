@@ -32,15 +32,22 @@ class UuidParamConverter implements ParamConverterInterface
             return false;
         }
 
+        if (! \is_string($value)) {
+            throw new NotFoundHttpException(\sprintf(
+                'Invalid uuid given - expected "string", "%s" given',
+                gettype($value)
+            ));
+        }
+
         try {
             $uuid = Uuid::fromString($value);
-
-            $request->attributes->set($param, $uuid);
-
-            return true;
         } catch (\InvalidArgumentException $e) {
             throw new NotFoundHttpException('Invalid uuid given');
         }
+
+        $request->attributes->set($param, $uuid);
+
+        return true;
     }
 
     public function supports(ParamConverter $configuration)

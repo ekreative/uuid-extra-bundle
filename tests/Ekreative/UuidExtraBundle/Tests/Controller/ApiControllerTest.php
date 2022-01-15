@@ -6,7 +6,7 @@ namespace Ekreative\UuidExtraBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ApiControllerTest extends WebTestCase
+final class ApiControllerTest extends WebTestCase
 {
     public function testSimple(): void
     {

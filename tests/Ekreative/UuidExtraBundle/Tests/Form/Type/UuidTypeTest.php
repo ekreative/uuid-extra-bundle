@@ -7,7 +7,7 @@ namespace Ekreative\UuidExtraBundle\Tests\Form\Type;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class UuidTypeTest extends TypeTestCase
+final class UuidTypeTest extends TypeTestCase
 {
     const TESTED_TYPE = 'Ekreative\UuidExtraBundle\Form\Type\UuidType';
 

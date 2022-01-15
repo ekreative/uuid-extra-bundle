@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class UuidParamConverterTest extends TestCase
+final class UuidParamConverterTest extends TestCase
 {
     /** @var UuidParamConverter */
     private $converter;
@@ -45,8 +45,20 @@ class UuidParamConverterTest extends TestCase
 
         $this->converter->apply($request, $config);
 
-        $this->assertInstanceOf(UuidInterface::class, $request->attributes->get('uuid'));
-        $this->assertEquals('f13a5b20-9741-4b15-8120-138009d8e0c7', $request->attributes->get('uuid')->toString());
+        $this->assertEquals(
+            Uuid::fromString('f13a5b20-9741-4b15-8120-138009d8e0c7'),
+            $request->attributes->get('uuid')
+        );
+    }
+
+    public function testApplyInvalidValueTypeForUuidWillLeadToA404Exception(): void
+    {
+        $request = new Request([], [], ['uuid' => ['an', 'array', 'instead', 'of', 'a', 'string']]);
+        $config = $this->createConfiguration(Uuid::class, 'uuid');
+
+        $this->expectException(NotFoundHttpException::class);
+        $this->expectExceptionMessage('Invalid uuid given - expected "string", "array" given');
+        $this->converter->apply($request, $config);
     }
 
     public function testApplyInvalidUuid404Exception(): void

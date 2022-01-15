@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class FooTypeTest extends WebTestCase
+final class FooTypeTest extends WebTestCase
 {
     public function testFoo(): void
     {

@@ -9,9 +9,10 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Serializer;
 
-class UuidNormalizerTest extends TestCase
+final class UuidNormalizerTest extends TestCase
 {
     public function testSerialization(): void
     {
@@ -24,10 +25,28 @@ class UuidNormalizerTest extends TestCase
 
     public function testNormalization(): void
     {
-        $serializer = new Serializer([new UuidNormalizer()], [new JsonEncoder()]);
-        $obj = $serializer->deserialize('"f13a5b20-9741-4b15-8120-138009d8e0c7"', UuidInterface::class, 'json');
+        $this->assertEquals(
+            Uuid::fromString('f13a5b20-9741-4b15-8120-138009d8e0c7'),
+            (new Serializer([new UuidNormalizer()], [new JsonEncoder()]))
+                ->deserialize('"f13a5b20-9741-4b15-8120-138009d8e0c7"', UuidInterface::class, 'json')
+        );
+    }
 
-        $uuid = Uuid::fromString('f13a5b20-9741-4b15-8120-138009d8e0c7');
-        $this->assertEquals($uuid, $uuid);
+    public function testNormalizationRejectsInvalidUuidString(): void
+    {
+        $serializer = new Serializer([new UuidNormalizer()], [new JsonEncoder()]);
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Not a valid uuid string');
+        $serializer->deserialize('"not-valid"', UuidInterface::class, 'json');
+    }
+
+    public function testNormalizationRejectsNonStringUuid(): void
+    {
+        $serializer = new Serializer([new UuidNormalizer()], [new JsonEncoder()]);
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Not a valid uuid string - "string" expected, "array" given');
+        $serializer->deserialize('{"an": "object"}', UuidInterface::class, 'json');
     }
 }
