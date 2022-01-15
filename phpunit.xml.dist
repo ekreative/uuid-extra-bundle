@@ -14,7 +14,7 @@
     </testsuites>
 
     <php>
-        <server name="KERNEL_CLASS" value="TestKernel" />
+        <server name="KERNEL_CLASS" value="Ekreative\UuidExtraBundle\TestKernel" />
     </php>
 
     <coverage>

@@ -11,7 +11,6 @@ final class Foo
 {
     /**
      * @var ?UuidInterface
-     *
      * @Assert\Uuid
      */
     private $uuid;

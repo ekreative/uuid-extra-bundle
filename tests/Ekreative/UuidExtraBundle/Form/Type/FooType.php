@@ -11,11 +11,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class FooType extends AbstractType
 {
+    /** {@inheritDoc} */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('uuid')
-        ;
+            ->add('uuid');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

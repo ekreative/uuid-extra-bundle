@@ -17,7 +17,7 @@ final class UuidNormalizerTest extends TestCase
     public function testSerialization(): void
     {
         $serializer = new Serializer([new UuidNormalizer()], [new JsonEncoder()]);
-        $uuid = Uuid::fromString('f13a5b20-9741-4b15-8120-138009d8e0c7');
+        $uuid       = Uuid::fromString('f13a5b20-9741-4b15-8120-138009d8e0c7');
 
         $data = $serializer->serialize($uuid, 'json');
         $this->assertEquals('"f13a5b20-9741-4b15-8120-138009d8e0c7"', $data);

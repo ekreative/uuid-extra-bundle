@@ -34,7 +34,7 @@ final class TestController
      * @ParamConverter("uuid", class="Ramsey\Uuid\UuidInterface")
      * @Route("/optional/{uuid}")
      */
-    public function optionalAction(UuidInterface $uuid = null): Response
+    public function optionalAction(?UuidInterface $uuid = null): Response
     {
         return new Response($uuid ? $uuid->toString() : null);
     }
@@ -50,7 +50,7 @@ final class TestController
     /**
      * @Route("/optionalAutomatic/{uuid}")
      */
-    public function optionalAutomaticAction(UuidInterface $uuid = null): Response
+    public function optionalAutomaticAction(?UuidInterface $uuid = null): Response
     {
         return new Response($uuid ? $uuid->toString() : null);
     }

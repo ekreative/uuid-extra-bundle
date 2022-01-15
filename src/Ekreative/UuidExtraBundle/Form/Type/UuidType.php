@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class UuidType extends AbstractType
 {
+    /** {@inheritDoc} */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(new UuidTransformer());

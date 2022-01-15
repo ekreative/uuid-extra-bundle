@@ -11,12 +11,17 @@ use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+use function gettype;
+use function is_string;
+use function sprintf;
+
 class UuidNormalizer implements NormalizerInterface, DenormalizerInterface
 {
+    /** {@inheritDoc} */
     public function denormalize($data, $type, $format = null, array $context = [])
     {
-        if (! \is_string($data)) {
-            throw new InvalidArgumentException(\sprintf(
+        if (! is_string($data)) {
+            throw new InvalidArgumentException(sprintf(
                 'Not a valid uuid string - "string" expected, "%s" given',
                 gettype($data)
             ));
@@ -29,17 +34,20 @@ class UuidNormalizer implements NormalizerInterface, DenormalizerInterface
         }
     }
 
+    /** {@inheritDoc} */
     public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === UuidInterface::class || $type === Uuid::class || $type === LazyUuidFromString::class;
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    /** {@inheritDoc} */
+    public function normalize($object, $format = null, array $context = []): string
     {
         return (string) $object;
     }
 
-    public function supportsNormalization($data, $format = null)
+    /** {@inheritDoc} */
+    public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof UuidInterface;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ekreative\UuidExtraBundle\Tests\ParamConverter;
 
+use DateTime;
 use Ekreative\UuidExtraBundle\ParamConverter\UuidParamConverter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -31,7 +32,7 @@ final class UuidParamConverterTest extends TestCase
         $config = $this->createConfiguration(UuidInterface::class);
         $this->assertTrue($this->converter->supports($config));
 
-        $config = $this->createConfiguration(__CLASS__);
+        $config = $this->createConfiguration(self::class);
         $this->assertFalse($this->converter->supports($config));
 
         $config = $this->createConfiguration();
@@ -41,7 +42,7 @@ final class UuidParamConverterTest extends TestCase
     public function testApply(): void
     {
         $request = new Request([], [], ['uuid' => 'f13a5b20-9741-4b15-8120-138009d8e0c7']);
-        $config = $this->createConfiguration(Uuid::class, 'uuid');
+        $config  = $this->createConfiguration(Uuid::class, 'uuid');
 
         $this->converter->apply($request, $config);
 
@@ -54,7 +55,7 @@ final class UuidParamConverterTest extends TestCase
     public function testApplyInvalidValueTypeForUuidWillLeadToA404Exception(): void
     {
         $request = new Request([], [], ['uuid' => ['an', 'array', 'instead', 'of', 'a', 'string']]);
-        $config = $this->createConfiguration(Uuid::class, 'uuid');
+        $config  = $this->createConfiguration(Uuid::class, 'uuid');
 
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Invalid uuid given - expected "string", "array" given');
@@ -64,7 +65,7 @@ final class UuidParamConverterTest extends TestCase
     public function testApplyInvalidUuid404Exception(): void
     {
         $request = new Request([], [], ['uuid' => 'Invalid uuid Format']);
-        $config = $this->createConfiguration(Uuid::class, 'uuid');
+        $config  = $this->createConfiguration(Uuid::class, 'uuid');
 
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Invalid uuid given');
@@ -74,7 +75,7 @@ final class UuidParamConverterTest extends TestCase
     public function testApplyOptionalWithEmptyAttribute(): void
     {
         $request = new Request([], [], ['uuid' => null]);
-        $config = $this->createConfiguration(\DateTime::class, 'uuid');
+        $config  = $this->createConfiguration(DateTime::class, 'uuid');
         $config->expects($this->once())
             ->method('isOptional')
             ->willReturn(true);
@@ -94,12 +95,13 @@ final class UuidParamConverterTest extends TestCase
     ): ParamConverter {
         $config = $this->createMock(ParamConverter::class);
 
-        if (null !== $name) {
+        if ($name !== null) {
             $config->expects($this->any())
                 ->method('getName')
                 ->willReturn($name);
         }
-        if (null !== $class) {
+
+        if ($class !== null) {
             $config->expects($this->any())
                 ->method('getClass')
                 ->willReturn($class);

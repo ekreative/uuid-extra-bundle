@@ -9,11 +9,11 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class UuidTypeTest extends TypeTestCase
 {
-    const TESTED_TYPE = 'Ekreative\UuidExtraBundle\Form\Type\UuidType';
+    public const TESTED_TYPE = 'Ekreative\UuidExtraBundle\Form\Type\UuidType';
 
     public function testSubmitCastsToInteger(): void
     {
-        $form = $this->factory->create(static::TESTED_TYPE);
+        $form = $this->factory->create(self::TESTED_TYPE);
 
         $form->submit('f13a5b20-9741-4b15-8120-138009d8e0c7');
 
@@ -23,7 +23,7 @@ final class UuidTypeTest extends TypeTestCase
 
     public function testSubmitNull(): void
     {
-        $form = $this->factory->create(static::TESTED_TYPE);
+        $form = $this->factory->create(self::TESTED_TYPE);
 
         $form->submit(null);
 
@@ -37,9 +37,7 @@ final class UuidTypeTest extends TypeTestCase
     ): void {
         $expectedData = Uuid::fromString($expectedData);
 
-        $form = $this->factory->create(static::TESTED_TYPE, null, [
-            'empty_data' => $emptyData,
-        ]);
+        $form = $this->factory->create(self::TESTED_TYPE, null, ['empty_data' => $emptyData]);
         $form->submit(null);
 
         $this->assertEquals($emptyData, $form->getViewData());

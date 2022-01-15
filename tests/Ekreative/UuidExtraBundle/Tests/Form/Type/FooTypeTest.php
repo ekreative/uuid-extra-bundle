@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+use function assert;
+
 final class FooTypeTest extends WebTestCase
 {
     public function testFoo(): void
@@ -23,7 +25,7 @@ final class FooTypeTest extends WebTestCase
         $factory = $client->getContainer()
             ->get('test.form.factory');
 
-        \assert($factory instanceof FormFactoryInterface);
+        assert($factory instanceof FormFactoryInterface);
 
         $form = $factory->createBuilder(FooType::class, $f)
             ->getForm();
@@ -32,9 +34,7 @@ final class FooTypeTest extends WebTestCase
         $this->assertInstanceOf(UuidType::class, $element->getConfig()->getType()->getInnerType());
 
         $request = Request::create('/', 'POST', [
-            'foo' => [
-                'uuid' => '5b10f27c-8a8f-4cd4-9d0b-1ff2f8d7a268',
-            ],
+            'foo' => ['uuid' => '5b10f27c-8a8f-4cd4-9d0b-1ff2f8d7a268'],
         ]);
 
         $form->handleRequest($request);
