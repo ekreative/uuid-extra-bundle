@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace Ekreative\UuidExtraBundle\Tests\ParamConverter;
 
+use DateTime;
 use Ekreative\UuidExtraBundle\ParamConverter\UuidParamConverter;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class UuidParamConverterTest extends TestCase
+final class UuidParamConverterTest extends TestCase
 {
     /** @var UuidParamConverter */
     private $converter;
@@ -21,7 +24,7 @@ class UuidParamConverterTest extends TestCase
         $this->converter = new UuidParamConverter();
     }
 
-    public function testSupports()
+    public function testSupports(): void
     {
         $config = $this->createConfiguration(Uuid::class);
         $this->assertTrue($this->converter->supports($config));
@@ -29,38 +32,50 @@ class UuidParamConverterTest extends TestCase
         $config = $this->createConfiguration(UuidInterface::class);
         $this->assertTrue($this->converter->supports($config));
 
-        $config = $this->createConfiguration(__CLASS__);
+        $config = $this->createConfiguration(self::class);
         $this->assertFalse($this->converter->supports($config));
 
         $config = $this->createConfiguration();
         $this->assertFalse($this->converter->supports($config));
     }
 
-    public function testApply()
+    public function testApply(): void
     {
         $request = new Request([], [], ['uuid' => 'f13a5b20-9741-4b15-8120-138009d8e0c7']);
-        $config = $this->createConfiguration(Uuid::class, 'uuid');
+        $config  = $this->createConfiguration(Uuid::class, 'uuid');
 
         $this->converter->apply($request, $config);
 
-        $this->assertInstanceOf(UuidInterface::class, $request->attributes->get('uuid'));
-        $this->assertEquals('f13a5b20-9741-4b15-8120-138009d8e0c7', $request->attributes->get('uuid')->toString());
+        $this->assertEquals(
+            Uuid::fromString('f13a5b20-9741-4b15-8120-138009d8e0c7'),
+            $request->attributes->get('uuid')
+        );
     }
 
-    public function testApplyInvalidUuid404Exception()
+    public function testApplyInvalidValueTypeForUuidWillLeadToA404Exception(): void
+    {
+        $request = new Request([], [], ['uuid' => ['an', 'array', 'instead', 'of', 'a', 'string']]);
+        $config  = $this->createConfiguration(Uuid::class, 'uuid');
+
+        $this->expectException(NotFoundHttpException::class);
+        $this->expectExceptionMessage('Invalid uuid given - expected "string", "array" given');
+        $this->converter->apply($request, $config);
+    }
+
+    public function testApplyInvalidUuid404Exception(): void
     {
         $request = new Request([], [], ['uuid' => 'Invalid uuid Format']);
-        $config = $this->createConfiguration(Uuid::class, 'uuid');
+        $config  = $this->createConfiguration(Uuid::class, 'uuid');
 
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Invalid uuid given');
         $this->converter->apply($request, $config);
     }
 
-    public function testApplyOptionalWithEmptyAttribute()
+    public function testApplyOptionalWithEmptyAttribute(): void
     {
         $request = new Request([], [], ['uuid' => null]);
-        $config = $this->createConfiguration('DateTime', 'uuid');
+        $config  = $this->createConfiguration(DateTime::class, 'uuid');
         $config->expects($this->once())
             ->method('isOptional')
             ->willReturn(true);
@@ -69,20 +84,24 @@ class UuidParamConverterTest extends TestCase
         $this->assertNull($request->attributes->get('uuid'));
     }
 
-    public function createConfiguration($class = null, $name = null)
-    {
-        $config = $this
-            ->getMockBuilder('Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter')
-            ->setMethods(['getClass', 'getAliasName', 'getOptions', 'getName', 'allowArray', 'isOptional'])
-            ->disableOriginalConstructor()
-            ->getMock();
+    /**
+     * @param class-string|null $class
+     *
+     * @return ParamConverter&MockObject
+     */
+    public function createConfiguration(
+        ?string $class = null,
+        ?string $name = null
+    ): ParamConverter {
+        $config = $this->createMock(ParamConverter::class);
 
-        if (null !== $name) {
+        if ($name !== null) {
             $config->expects($this->any())
                 ->method('getName')
                 ->willReturn($name);
         }
-        if (null !== $class) {
+
+        if ($class !== null) {
             $config->expects($this->any())
                 ->method('getClass')
                 ->willReturn($class);

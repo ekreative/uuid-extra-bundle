@@ -4,102 +4,111 @@ declare(strict_types=1);
 
 namespace Ekreative\UuidExtraBundle\Form;
 
+use Closure;
 use Ekreative\UuidExtraBundle\Form\Type\UuidType;
+use Ramsey\Uuid\Rfc4122\Validator;
+use Ramsey\Uuid\Validator\ValidatorInterface;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Guess\ValueGuess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Uuid;
+use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;
+
+use function get_class;
 
 class ValidatorTypeGuesser extends \Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function guessType($class, $property)
+    /** @var ValidatorInterface */
+    private $validator;
+
+    public function __construct(MetadataFactoryInterface $metadataFactory, ?ValidatorInterface $validator = null)
     {
-        return $this->guess($class, $property, function (Constraint $constraint) {
+        parent::__construct($metadataFactory);
+
+        $this->validator = $validator ?? new Validator();
+    }
+
+    public function guessType(string $class, string $property): ?TypeGuess
+    {
+        return $this->guess($class, $property, function (Constraint $constraint): ?TypeGuess {
             return $this->guessTypeForConstraint($constraint);
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function guessRequired($class, $property)
+    public function guessRequired(string $class, string $property): ?ValueGuess
     {
-        return $this->guess($class, $property, function (Constraint $constraint) {
+        return $this->guess($class, $property, function (Constraint $constraint): ?ValueGuess {
             return $this->guessRequiredForConstraint($constraint);
+
         // If we don't find any constraint telling otherwise, we can assume
             // that a field is not required (with LOW_CONFIDENCE)
         }, false);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function guessMaxLength($class, $property)
+    public function guessMaxLength(string $class, string $property): ?ValueGuess
     {
-        return $this->guess($class, $property, function (Constraint $constraint) {
+        return $this->guess($class, $property, function (Constraint $constraint): ?ValueGuess {
             return $this->guessMaxLengthForConstraint($constraint);
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function guessPattern($class, $property)
+    public function guessPattern(string $class, string $property): ?ValueGuess
     {
-        return $this->guess($class, $property, function (Constraint $constraint) {
+        return $this->guess($class, $property, function (Constraint $constraint): ?ValueGuess {
             return $this->guessPatternForConstraint($constraint);
         });
     }
 
-    /**
-     * Guesses a field class name for a given constraint.
-     *
-     * @return TypeGuess|null The guessed field class and options
-     */
-    public function guessTypeForConstraint(Constraint $constraint)
+    public function guessTypeForConstraint(Constraint $constraint): ?TypeGuess
     {
-        switch (\get_class($constraint)) {
-            case Uuid::class:
-                return new TypeGuess(UuidType::class, [], Guess::HIGH_CONFIDENCE);
+        if (get_class($constraint) !== Uuid::class) {
+            return null;
         }
+
+        return new TypeGuess(UuidType::class, [], Guess::HIGH_CONFIDENCE);
+    }
+
+    /** @return null */
+    public function guessRequiredForConstraint(Constraint $constraint): ?ValueGuess
+    {
+        return null;
+    }
+
+    public function guessMaxLengthForConstraint(Constraint $constraint): ?ValueGuess
+    {
+        if (get_class($constraint) !== Uuid::class) {
+            return new ValueGuess(36, Guess::HIGH_CONFIDENCE);
+        }
+
+        return null;
+    }
+
+    public function guessPatternForConstraint(Constraint $constraint): ?ValueGuess
+    {
+        if (get_class($constraint) !== Uuid::class) {
+            return new ValueGuess($this->validator->getPattern(), Guess::HIGH_CONFIDENCE);
+        }
+
+        return null;
     }
 
     /**
-     * Guesses whether a field is required based on the given constraint.
+     * {@inheritDoc}
      *
-     * @return ValueGuess|null The guess whether the field is required
-     */
-    public function guessRequiredForConstraint(Constraint $constraint)
-    {
-    }
-
-    /**
-     * Guesses a field's maximum length based on the given constraint.
+     * @param Closure(Constraint ): T $closure
+     * @param mixed                   $defaultValue
      *
-     * @return ValueGuess|null The guess for the maximum length
-     */
-    public function guessMaxLengthForConstraint(Constraint $constraint)
-    {
-        switch (\get_class($constraint)) {
-            case Uuid::class:
-                return new ValueGuess(36, Guess::HIGH_CONFIDENCE);
-        }
-    }
-
-    /**
-     * Guesses a field's pattern based on the given constraint.
+     * @return T|null
      *
-     * @return ValueGuess|null The guess for the pattern
+     * @template T of Guess|null
+     * @psalm-suppress MoreSpecificImplementedParamType this method is really just in place to better specify the
+     *                 definition of {@see \Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser::guess()}
+     * @psalm-suppress InvalidReturnStatement the parent definition returns a type that is too generic
+     * @psalm-suppress InvalidReturnType the parent definition returns a type that is too generic
      */
-    public function guessPatternForConstraint(Constraint $constraint)
+    protected function guess(string $class, string $property, Closure $closure, $defaultValue = null): ?Guess
     {
-        switch (\get_class($constraint)) {
-            case Uuid::class:
-                return new ValueGuess(\Ramsey\Uuid\Uuid::VALID_PATTERN, Guess::HIGH_CONFIDENCE);
-        }
+        return parent::guess($class, $property, $closure, $defaultValue);
     }
 }

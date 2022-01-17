@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class TestController
+final class TestController
 {
     /** @var SerializerInterface */
     private $serializer;
@@ -25,7 +25,7 @@ class TestController
      * @ParamConverter("uuid", class="Ramsey\Uuid\UuidInterface")
      * @Route("/simple/{uuid}")
      */
-    public function simpleAction(UuidInterface $uuid)
+    public function simpleAction(UuidInterface $uuid): Response
     {
         return new Response($uuid->toString());
     }
@@ -34,7 +34,7 @@ class TestController
      * @ParamConverter("uuid", class="Ramsey\Uuid\UuidInterface")
      * @Route("/optional/{uuid}")
      */
-    public function optionalAction(UuidInterface $uuid = null)
+    public function optionalAction(?UuidInterface $uuid = null): Response
     {
         return new Response($uuid ? $uuid->toString() : null);
     }
@@ -42,7 +42,7 @@ class TestController
     /**
      * @Route("/automatic/{uuid}")
      */
-    public function automaticAction(UuidInterface $uuid)
+    public function automaticAction(UuidInterface $uuid): Response
     {
         return new Response($uuid->toString());
     }
@@ -50,7 +50,7 @@ class TestController
     /**
      * @Route("/optionalAutomatic/{uuid}")
      */
-    public function optionalAutomaticAction(UuidInterface $uuid = null)
+    public function optionalAutomaticAction(?UuidInterface $uuid = null): Response
     {
         return new Response($uuid ? $uuid->toString() : null);
     }
@@ -58,7 +58,7 @@ class TestController
     /**
      * @Route("/serialized")
      */
-    public function serializeAction()
+    public function serializeAction(): Response
     {
         return new Response($this->serializer->serialize(Uuid::fromString('f13a5b20-9741-4b15-8120-138009d8e0c7'), 'json'));
     }

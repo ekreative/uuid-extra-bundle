@@ -6,9 +6,9 @@ namespace Ekreative\UuidExtraBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ApiControllerTest extends WebTestCase
+final class ApiControllerTest extends WebTestCase
 {
-    public function testSimple()
+    public function testSimple(): void
     {
         $client = self::createClient();
 
@@ -17,7 +17,7 @@ class ApiControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testOptional()
+    public function testOptional(): void
     {
         $client = self::createClient();
 
@@ -26,7 +26,7 @@ class ApiControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testOptionalNull()
+    public function testOptionalNull(): void
     {
         $client = self::createClient();
 
@@ -35,7 +35,7 @@ class ApiControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testAutomatic()
+    public function testAutomatic(): void
     {
         $client = self::createClient();
 
@@ -44,7 +44,7 @@ class ApiControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testOptionalAutomatic()
+    public function testOptionalAutomatic(): void
     {
         $client = self::createClient();
 
@@ -53,7 +53,7 @@ class ApiControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testOptionalAutomaticNull()
+    public function testOptionalAutomaticNull(): void
     {
         $client = self::createClient();
 
@@ -62,7 +62,7 @@ class ApiControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testSerializer()
+    public function testSerializer(): void
     {
         $client = self::createClient();
 

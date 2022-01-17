@@ -7,13 +7,13 @@ namespace Ekreative\UuidExtraBundle\Tests\Form\Type;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class UuidTypeTest extends TypeTestCase
+final class UuidTypeTest extends TypeTestCase
 {
-    const TESTED_TYPE = 'Ekreative\UuidExtraBundle\Form\Type\UuidType';
+    public const TESTED_TYPE = 'Ekreative\UuidExtraBundle\Form\Type\UuidType';
 
-    public function testSubmitCastsToInteger()
+    public function testSubmitCastsToInteger(): void
     {
-        $form = $this->factory->create(static::TESTED_TYPE);
+        $form = $this->factory->create(self::TESTED_TYPE);
 
         $form->submit('f13a5b20-9741-4b15-8120-138009d8e0c7');
 
@@ -21,9 +21,9 @@ class UuidTypeTest extends TypeTestCase
         $this->assertSame('f13a5b20-9741-4b15-8120-138009d8e0c7', $form->getViewData());
     }
 
-    public function testSubmitNull($expected = null, $norm = null, $view = null)
+    public function testSubmitNull(): void
     {
-        $form = $this->factory->create(static::TESTED_TYPE);
+        $form = $this->factory->create(self::TESTED_TYPE);
 
         $form->submit(null);
 
@@ -31,13 +31,13 @@ class UuidTypeTest extends TypeTestCase
         $this->assertSame('', $form->getViewData());
     }
 
-    public function testSubmitNullUsesDefaultEmptyData($emptyData = 'f13a5b20-9741-4b15-8120-138009d8e0c7', $expectedData = 'f13a5b20-9741-4b15-8120-138009d8e0c7')
-    {
+    public function testSubmitNullUsesDefaultEmptyData(
+        string $emptyData = 'f13a5b20-9741-4b15-8120-138009d8e0c7',
+        string $expectedData = 'f13a5b20-9741-4b15-8120-138009d8e0c7'
+    ): void {
         $expectedData = Uuid::fromString($expectedData);
 
-        $form = $this->factory->create(static::TESTED_TYPE, null, [
-            'empty_data' => $emptyData,
-        ]);
+        $form = $this->factory->create(self::TESTED_TYPE, null, ['empty_data' => $emptyData]);
         $form->submit(null);
 
         $this->assertEquals($emptyData, $form->getViewData());
