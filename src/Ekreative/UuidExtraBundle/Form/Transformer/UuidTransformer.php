@@ -15,7 +15,7 @@ use function is_string;
 class UuidTransformer implements DataTransformerInterface
 {
     /** {@inheritDoc} */
-    public function transform($value)
+    public function transform($value): string
     {
         if ($value === null) {
             return '';
@@ -29,7 +29,7 @@ class UuidTransformer implements DataTransformerInterface
     }
 
     /** {@inheritDoc} */
-    public function reverseTransform($value)
+    public function reverseTransform($value): ?UuidInterface
     {
         if (empty($value)) {
             return null;

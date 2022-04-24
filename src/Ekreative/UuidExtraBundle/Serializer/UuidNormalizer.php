@@ -18,7 +18,7 @@ use function sprintf;
 class UuidNormalizer implements NormalizerInterface, DenormalizerInterface
 {
     /** {@inheritDoc} */
-    public function denormalize($data, $type, $format = null, array $context = [])
+    public function denormalize($data, $type, $format = null, array $context = []): UuidInterface
     {
         if (! is_string($data)) {
             throw new InvalidArgumentException(sprintf(
@@ -35,7 +35,7 @@ class UuidNormalizer implements NormalizerInterface, DenormalizerInterface
     }
 
     /** {@inheritDoc} */
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization($data, $type, $format = null): bool
     {
         return $type === UuidInterface::class || $type === Uuid::class || $type === LazyUuidFromString::class;
     }
