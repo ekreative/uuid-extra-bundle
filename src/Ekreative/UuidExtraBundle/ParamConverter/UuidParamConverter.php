@@ -23,7 +23,7 @@ class UuidParamConverter implements ParamConverterInterface
      *
      * @throws NotFoundHttpException When invalid uuid given.
      */
-    public function apply(Request $request, ParamConverter $configuration)
+    public function apply(Request $request, ParamConverter $configuration): bool
     {
         $param = $configuration->getName();
 
