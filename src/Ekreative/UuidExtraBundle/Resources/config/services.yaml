@@ -1,0 +1,15 @@
+services:
+  Ekreative\UuidExtraBundle\Serializer\UuidNormalizer:
+    tags:
+      - { name: 'serializer.normalizer' }
+
+  Ekreative\UuidExtraBundle\Form\ValidatorTypeGuesser:
+    tags:
+      - { name: 'form.type_guesser' }
+    arguments:
+      - '@validator.mapping.class_metadata_factory'
+
+  Ekreative\UuidExtraBundle\ValueResolver\UUidValueResolver:
+    tags:
+      - controller.argument_value_resolver:
+          priority: 150

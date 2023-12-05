@@ -6,7 +6,7 @@ framework:
     secret: 'fake_secret'
     serializer: true
     form: ~
-    validation: { enable_annotations: true }
+    validation: { enable_attributes: true }
     property_access: ~
 
 monolog:

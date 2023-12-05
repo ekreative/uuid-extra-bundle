@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ekreative\UuidExtraBundle;
 
 use Ekreative;
-use Sensio;
 use Symfony;
 
 class TestKernel extends Symfony\Component\HttpKernel\Kernel
@@ -15,7 +14,6 @@ class TestKernel extends Symfony\Component\HttpKernel\Kernel
     {
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Ekreative\UuidExtraBundle\EkreativeUuidExtraBundle(),
         ];

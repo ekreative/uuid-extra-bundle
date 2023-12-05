@@ -2,39 +2,38 @@
 
 declare(strict_types=1);
 
-namespace Ekreative\UuidExtraBundle\ParamConverter;
+namespace Ekreative\UuidExtraBundle\ValueResolver;
 
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
+use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use function gettype;
 use function is_string;
 use function sprintf;
 
-class UuidParamConverter implements ParamConverterInterface
+class UuidValueResolver implements ValueResolverInterface
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @throws NotFoundHttpException When invalid uuid given.
-     */
-    public function apply(Request $request, ParamConverter $configuration)
+    public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
-        $param = $configuration->getName();
+        if (! $this->supports($argument)) {
+            return [];
+        }
+
+        $param = $argument->getName();
 
         if (! $request->attributes->has($param)) {
-            return false;
+            return [];
         }
 
         $value = $request->attributes->get($param);
 
-        if (! $value && $configuration->isOptional()) {
-            return false;
+        if (! $value && $argument->isNullable()) {
+            return [];
         }
 
         if (! is_string($value)) {
@@ -45,19 +44,15 @@ class UuidParamConverter implements ParamConverterInterface
         }
 
         try {
-            $uuid = Uuid::fromString($value);
+            return [Uuid::fromString($value)];
         } catch (InvalidArgumentException $e) {
             throw new NotFoundHttpException('Invalid uuid given');
         }
-
-        $request->attributes->set($param, $uuid);
-
-        return true;
     }
 
-    public function supports(ParamConverter $configuration): bool
+    public function supports(ArgumentMetadata $argument): bool
     {
-        $class = $configuration->getClass();
+        $class = $argument->getType();
 
         return $class === UuidInterface::class || $class === Uuid::class;
     }
