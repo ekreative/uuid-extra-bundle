@@ -1,4 +1,4 @@
 ekreative_extra_converter:
     resource: "Ekreative/UuidExtraBundle/Controller/TestController.php"
-    type:     annotation
+    type:     attribute
     prefix:   /

@@ -6,10 +6,10 @@
     "homepage": "https://github.com/ekreative/uuid-extra-bundle",
     "license": "MIT",
     "require": {
-        "php": "^7.3 || ~8.0.0 || ~8.1.0",
-        "symfony/framework-bundle": "^5.4.2 || ^6.0.2",
-        "sensio/framework-extra-bundle": "^5.6.1 || 6.2.6",
-        "ramsey/uuid": "^4.2.3"
+        "php": "~8.1.0 || ~8.2.0",
+        "symfony/framework-bundle": "^6.3",
+        "ramsey/uuid": "^4.2.3",
+        "doctrine/annotations": "^2.0"
     },
     "authors": [
         {
@@ -23,13 +23,13 @@
     },
     "minimum-stability": "stable",
     "require-dev": {
-        "symfony/browser-kit": "^5.4.2 || ^6.0.1",
+        "symfony/browser-kit": "^6.3",
         "phpunit/phpunit": "^9.5.11",
         "symfony/monolog-bundle": "^3.7.1",
-        "symfony/form": "^5.4.2 || ^6.0.2",
-        "symfony/serializer": "^5.4.2 || ^6.0.2",
-        "symfony/yaml": "^5.4.2 || ^6.0.2",
-        "symfony/validator": "^5.4.2 || ^6.0.2",
+        "symfony/form": "^6.3",
+        "symfony/serializer": "^6.3",
+        "symfony/yaml": "^6.3",
+        "symfony/validator": "^6.3",
         "vimeo/psalm": "^4.18.1",
         "psalm/plugin-phpunit": "^0.16.1",
         "doctrine/coding-standard": "^9.0"
@@ -61,5 +61,10 @@
     },
     "autoload-dev": {
       "psr-4": { "Ekreative\\UuidExtraBundle\\": "tests/Ekreative/UuidExtraBundle/" }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }
